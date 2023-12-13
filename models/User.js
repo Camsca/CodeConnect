@@ -25,6 +25,12 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'User'
         }
-    ]
+    ],
 
-});
+}
+);
+// crear friend
+userSchema.virtual('friendCount').get(function() {
+    return this.friends.length;
+}
+);

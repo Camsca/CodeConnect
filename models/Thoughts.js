@@ -1,5 +1,5 @@
 const {Schema, model} = require('mongoose');
-const { Schema } = require('./User');
+
 //subdocument schema for reactions
 const reactionSchema = new Schema({
     reactionId: {

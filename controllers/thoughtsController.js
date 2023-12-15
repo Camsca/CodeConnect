@@ -1,5 +1,5 @@
 const {Thought} = require('../models/Thoughts');
-const { $where } = require('../models/User');
+const { User } = require('../models/User');
 
 module.exports = {
     //Get All Thoughts
@@ -41,6 +41,21 @@ if(!user){
     } catch (err) {
         res.status(500).json(err);
     }
-}
-
+},
+//Update Thought by _id
+async updateThought(req,res){
+    try{
+        const thought = await Thought.findByIdAndUpdate(
+            req.params.thoughtId, 
+            req.body, {
+            new: true,
+        });
+        if(!thought){
+            return res.status(404).json({message: 'Thought not found'})
+        }
+        res.json(thought)
+    }catch(err){
+        res.status(500).json(err);
+    }
+},
 };

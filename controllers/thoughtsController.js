@@ -58,4 +58,18 @@ async updateThought(req,res){
         res.status(500).json(err);
     }
 },
+//remove Thought by _id
+async removeThought(req, res) {
+    try {
+        const thought = await Thought.findByIdAndDelete(
+            req.params.thoughtId
+            );
+        if (!thought) {
+            return res.status(404).json({ message: 'Thought not found' });
+        }
+        res.json({ message: 'Thought deleted' });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
 };

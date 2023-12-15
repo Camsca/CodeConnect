@@ -18,7 +18,7 @@ module.exports = {
             .populate('friends')
 
             if(!user){
-                res.status(404).json({message: 'User not found'})
+               return res.status(404).json({message: 'User not found'})
                 
             }res.json(user)
         }catch(err){
@@ -35,4 +35,28 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    //Update User by _id
+    async updateUser(req,res){
+        try{
+ const user = await User.findByIdAndUpdate(req.params.userId, req.body, {new: true })
+            res.json(user)
+        }catch(err){
+            res.status(500).json(err);
+        }
+    },
+    //Delete User by _id
+    async deleteUser(req, res) {
+        try {
+            const user = await User.findByIdAndDelete(req.params.userId);
+            
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            
+            res.json({ message: 'User deleted' });
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
+
 }

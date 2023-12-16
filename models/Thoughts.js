@@ -1,4 +1,4 @@
-const {Schema, model} = require('mongoose');
+const {Schema, model, Types} = require('mongoose');
 
 //subdocument schema for reactions
 const reactionSchema = new Schema({
@@ -32,7 +32,7 @@ const reactionSchema = new Schema({
 );
 // schema for thoughts
 const thoughtSchema = new Schema({
-    thoghtText: {
+    thoughtText: {
         type: String,
         required: true,
        minlength: 1,
